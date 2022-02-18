@@ -1,0 +1,41 @@
+name: Deploy NGINX Configuration Action
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config/**
+
+permissions:
+      id-token: write
+      contents: read
+
+env:
+  AZURE_TENANT_ID: '72f988bf-86f1-41af-91ab-2d7cd011db47'
+  AZURE_CLIENT_ID: '92adefcb-3f47-41a0-b34a-438efaf16a96'
+  AZURE_SUBSCRIPTION_ID: 'e3853e83-0d02-4fb3-b88f-05b5fd21aee2'
+  AZURE_RESOURCE_GROUP_NAME: 'config-cicd-demo'
+  NGINX_DEPLOYMENT_NAME: 'github-githubcompositeaction'
+  NGINX_CONFIG_FILE: './config/nginx.conf'
+
+jobs:
+  Deploy-NGINX-Configuration:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout repository'
+      uses: actions/checkout@v2
+
+    - name: 'Run Azure Login with OIDC'
+      uses: azure/login@v1
+      with:
+        client-id: ${{ env.AZURE_CLIENT_ID }}
+        tenant-id: ${{ env.AZURE_TENANT_ID }}
+        subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+
+    - name: 'Sync NGINX configuration to NGINX on Azure instance'
+      uses: bangbingsyb/nginx-config-sync-action@v1
+      with:
+        subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        resource-group-name: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
+        nginx-deployment-name: ${{ env.NGINX_DEPLOYMENT_NAME }}
+        nginx-config-file-path: ${{ env.NGINX_CONFIG_FILE }}
