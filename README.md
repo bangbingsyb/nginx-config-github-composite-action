@@ -1,1 +1,0 @@
-# nginx-config-github-composite-action
