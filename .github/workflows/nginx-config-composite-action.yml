@@ -27,7 +27,7 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: 'Sync NGINX configuration to NGINX on Azure instance'
-      uses: bangbingsyb/nginx-config-sync-action@v1
+      uses: nginxinc/nginx-for-azure-deploy-action@v0
       with:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
