@@ -27,9 +27,10 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: 'Sync NGINX configuration to NGINX on Azure instance'
-      uses: nginxinc/nginx-for-azure-deploy-action@v0
+      uses: bangbingsyb/nginx-config-sync-action@v1
       with:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
         nginx-deployment-name: ${{ secrets.NGINX_DEPLOYMENT_NAME }}
-        nginx-config-relative-file-path: ${{ secrets.NGINX_CONFIG_FILE }}
+        nginx-config-directory: config
+        nginx-root-config-file: nginx.conf
