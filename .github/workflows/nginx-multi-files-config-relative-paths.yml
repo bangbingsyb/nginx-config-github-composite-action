@@ -33,3 +33,4 @@ jobs:
         resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
         nginx-deployment-name: ${{ secrets.NGINX_DEPLOYMENT_NAME }}
         nginx-config-directory-path: config-relative-paths
+        transformed-nginx-config-directory-path: ''
