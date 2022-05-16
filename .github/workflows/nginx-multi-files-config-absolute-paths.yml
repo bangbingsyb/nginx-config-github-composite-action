@@ -33,5 +33,4 @@ jobs:
         resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
         nginx-deployment-name: ${{ secrets.NGINX_DEPLOYMENT_NAME }}
         nginx-config-directory-path: config-absolute-paths
-        nginx-root-config-file-name: nginx.conf
         transformed-nginx-config-directory-path: /etc/nginx
